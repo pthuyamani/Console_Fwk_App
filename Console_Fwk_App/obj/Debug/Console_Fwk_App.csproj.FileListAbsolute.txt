@@ -1,0 +1,8 @@
+C:\Users\praveen_t\source\repos\Console_Fwk_App\Console_Fwk_App\bin\Debug\Console_Fwk_App.exe.config
+C:\Users\praveen_t\source\repos\Console_Fwk_App\Console_Fwk_App\bin\Debug\Console_Fwk_App.exe
+C:\Users\praveen_t\source\repos\Console_Fwk_App\Console_Fwk_App\bin\Debug\Console_Fwk_App.pdb
+C:\Users\praveen_t\source\repos\Console_Fwk_App\Console_Fwk_App\obj\Debug\Console_Fwk_App.csproj.AssemblyReference.cache
+C:\Users\praveen_t\source\repos\Console_Fwk_App\Console_Fwk_App\obj\Debug\Console_Fwk_App.csproj.SuggestedBindingRedirects.cache
+C:\Users\praveen_t\source\repos\Console_Fwk_App\Console_Fwk_App\obj\Debug\Console_Fwk_App.csproj.CoreCompileInputs.cache
+C:\Users\praveen_t\source\repos\Console_Fwk_App\Console_Fwk_App\obj\Debug\Console_Fwk_App.exe
+C:\Users\praveen_t\source\repos\Console_Fwk_App\Console_Fwk_App\obj\Debug\Console_Fwk_App.pdb
