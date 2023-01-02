@@ -15,6 +15,7 @@ node {
 		echo "SonarQube scan passed Praveen Thuyamani"
 	  }else{
 		error "SonarQube scan failed"
+	  }
 	}
   }
 }
