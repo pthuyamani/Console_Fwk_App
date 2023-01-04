@@ -19,3 +19,5 @@ node {
 	} else {
 		println "SonarQube scan failed and rejected"
   }
+  }
+  }
