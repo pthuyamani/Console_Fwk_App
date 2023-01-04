@@ -9,16 +9,13 @@ node {
       bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:\"Console_Fwk_App\""
       bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
       bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end"
-	  
+	  if ($LastExitCode -eq 0){
+	  echo "Accepted"
+	  }
+	  else{
+	  echo "Rejected"
 	}
 	}
-  stage('Sonar Scan Verification') {
-	def scanResult = sonarScanner.getResult()
-	if (scanResult == "SUCCESS"){
-		echo "Accepted"
-	} else {
-		echo "Rejected"
-		
+  
   }
-}
-}
+  }
