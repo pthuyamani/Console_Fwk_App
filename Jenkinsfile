@@ -13,18 +13,13 @@ node {
 	}
 	}
   stage('Sonar Scan Verification'){
-	when {
-		def report = httpRequest url: 'http://localhost:9000/api/qualitygates/project_status',
-								 auth: ['username':'admin','password':'admin123'],
-								 customHeaders:[[name:'Content-Type', value:'application/json']],
-								 requestBody: """{"projectKey": "Console_Fwk_App"}"""
-		
-		def analysisStatus = readJSON(text: report.content).qualityGate.status
-		expression { analysisStatus == "OK"}
-	}
-	steps{
-		echo "Accepted and Successful"
-  
+	def scanResult = sonarqube.getResult()
+	if (scanResult == "SUCCESS"){
+		def analysisProperties = sonarScanner.getAnalysisProperties()
+		def qualityGateStatus = analysisProperties['sonar.qualitygate.status']
+		if (qualityGateStatus == "OK"){
+			echo "Accepted the Scan"
+		}
   }
   }
   }
