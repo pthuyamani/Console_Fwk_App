@@ -11,11 +11,14 @@ node {
       bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end"
 	  
 	}
+	}
+  stage('Sonar Scan Verification') {
 	def scanResult = sonarScanner.getResult()
 	if (scanResult == "SUCCESS"){
 		echo "Accepted"
 	} else {
 		echo "Rejected"
-	}
+		
   }
+}
 }
