@@ -12,4 +12,10 @@ node {
 	  
 	}
     }
+  stage ('Sonar Scan Verification'){
+	def sonarScannerOutpu = sh(script: "sonar-scanner",returnStdout:true)
+	if (sonarScannerOutput.exitValue() == 0){
+		println "SonarQube scan successfully accepted"
+	} else {
+		println "SonarQube scan failed and rejected"
   }
