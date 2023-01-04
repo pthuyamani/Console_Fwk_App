@@ -11,13 +11,9 @@ node {
       bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end"
 	  
 	}
-    }
-  stage ('Sonar Scan Verification'){
-	def sonarScannerOutpu = sh(script: "sonar-scanner",returnStdout:true)
-	if (sonarScannerOutput.exitValue() == 0){
-		println "SonarQube scan successfully accepted"
-	} else {
-		println "SonarQube scan failed and rejected"
-  }
-  }
+    def qualitygate = waitForQualityGate()
+	if(qualitygate.status == "OK"){
+		echo "Accept Rule"
+	}
+ 
   }
