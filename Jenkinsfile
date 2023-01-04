@@ -12,7 +12,7 @@ node {
 	  
 	}
 	}
-  stage(Sonar Scan Verification){
+  stage('Sonar Scan Verification'){
 	when {
 		def report = httpRequest url: 'http://localhost:9000/api/qualitygates/project_status',
 								 auth: ['username':'admin','password':'admin123'],
