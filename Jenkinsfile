@@ -11,10 +11,21 @@ node {
       bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end"
 	  
 	}
-    def qualitygate = waitForQualityGate()
-	if(qualitygate.status == "OK"){
-		echo "Accept Rule"
 	}
- 
+  stage(Sonar Scan Verification){
+	when {
+		def report = httpRequest url: 'http://localhost:9000/api/qualitygates/project_status',
+								 auth: ['username':'admin','password':'admin123'],
+								 customHeaders:[[name:'Content-Type', value:'application/json']],
+								 requestBody: """{"projectKey": "Console_Fwk_App"}"""
+		
+		def analysisStatus = readJSON(text: report.content).qualityGate.status
+		expression { analysisStatus == "OK"}
+	}
+	steps{
+		echo "Accepted and Successful"
+  
   }
   }
+  }
+  
