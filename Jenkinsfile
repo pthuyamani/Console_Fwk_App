@@ -9,13 +9,7 @@ node {
       bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:\"Console_Fwk_App\""
       bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
       bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end"
-	  def scanResult = sonarScanner.getResult()
-	  if (scanResult == "SUCCESS"){
-		echo "Accept"
-		}
-		else{
-		echo "Reject"
-		}
+	  echo "sonarScanner.getResult()"
 	}
   }
 }
