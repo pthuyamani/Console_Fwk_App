@@ -1,27 +1,34 @@
-node {
-  stage('SCM') {
-    checkout scm
+pipeline {
+    agent any
+	environment {          
+     //BUILD NUMBER CHANGES
+     def msbuildHome    = tool 'Default MSBuild'
+     def scannerHome    = tool 'SonarScanner for MSBuild'
   }
-  stage('SonarQube Analysis') {
-    def msbuildHome = tool 'Default MSBuild'
-    def scannerHome = tool 'SonarScanner for MSBuild'
-    withSonarQubeEnv() {
-      bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:\"Console_Fwk_App\""
-      bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
-      bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end"
+    stages {
+        stage('SCM') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv() {
+					bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:\"Console_Fwk_App\""
+					bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
+					bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end"
 	  
-	}
-  }
- 
-}
- stage("Quality Gate"){
-  timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
-    def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
-    if (qg.status != 'OK') {
-      error "Pipeline aborted due to quality gate failure: ${qg.status}"
+				}			
+            }
+        }
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
     }
-  }
 }
-
-  
- 
