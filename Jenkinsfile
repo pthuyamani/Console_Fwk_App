@@ -11,16 +11,6 @@ node {
       bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end"
 	  
 	}
-	}
-  stage('Sonar Scan Verification'){
-	def scanResult = sonarqube.getResult()
-	if (scanResult == "SUCCESS"){
-		def analysisProperties = sonarScanner.getAnalysisProperties()
-		def qualityGateStatus = analysisProperties['sonar.qualitygate.status']
-		if (qualityGateStatus == "OK"){
-			echo "Accepted the Scan"
-		}
-  }
   }
   }
   
