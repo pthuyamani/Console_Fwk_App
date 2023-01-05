@@ -13,7 +13,7 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv() {
+                withSonarQubeEnv('sonarqube') {
 					bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:\"Console_Fwk_App\""
 					bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
 					bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end"
